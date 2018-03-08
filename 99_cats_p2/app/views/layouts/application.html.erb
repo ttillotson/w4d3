@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>NinetyNineCats</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+  </head>
+
+  <body>
+    <%if logged_in? %>
+      <block style="float: right;">
+        <%= current_user.username %>
+        <br>
+        <%= render 'layouts/login', action: :logout %>
+        <br>
+      </block>
+    <% else %>
+      <%= render 'layouts/login', action: :login %>
+    <% end %>
+
+    <% if flash[:errors].present? %>
+      <% flash[:errors].each do |error| %>
+        <%= error %>
+      <% end %>
+    <% end %>
+    <br>
+    <%= yield %>
+  </body>
+</html>

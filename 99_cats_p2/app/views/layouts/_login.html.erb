@@ -1,0 +1,22 @@
+<% if action == :logout %>
+  <% action_url = session_url %>
+  <% submit_value = "You're leaving us forever!" %>
+  <% method_value = "POST" %>
+<% else %>
+  <% action_url = new_session_url %>
+  <% submit_value = "Come join the Pawty" %>
+  <% method_value = "GET" %>
+<% end %>
+
+
+<form action="<%= action_url %>" method="<%= method_value %>">
+
+  <%= render 'layouts/auth'%>
+
+  <% if action == :logout %>
+    <input type="hidden" name="_method" value="DELETE">
+  <% end %>
+
+  <input type='submit' value='<%= submit_value %>'>
+
+</form>
